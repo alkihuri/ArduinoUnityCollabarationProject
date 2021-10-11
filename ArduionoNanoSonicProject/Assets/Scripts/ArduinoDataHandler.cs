@@ -8,25 +8,25 @@ public class ArduinoDataHandler : MonoBehaviour
 {
     [SerializeField] Transform _simulationBullshit;
     [SerializeField] SampleMessageListener mes;
-    private float dis;
+    [SerializeField , Range(0,10) ] float dis; 
+    [SerializeField, Range(0, 10)] float prevdis;
 
+    [SerializeField, Range(-1, 1)] public float Horizontal;
+    Vector3 _startPos; 
     // Start is called before the first frame update
     void Start()
     {
-        
+        _startPos = _simulationBullshit.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-        try
+        dis = System.Convert.ToSingle(mes.data);
+        prevdis = dis - 10;
+        if(prevdis > -10 && prevdis <10)
         {
-            dis = System.Convert.ToSingle(mes.data.Split(':').ToList().Last().Split(' ')[0]);
+            Horizontal = prevdis / 10;
         }
-        catch
-        {
-            dis = 0;
-        }
-        _simulationBullshit.transform.position = _simulationBullshit.transform.position + _simulationBullshit.transform.forward * dis;
     }
 }
