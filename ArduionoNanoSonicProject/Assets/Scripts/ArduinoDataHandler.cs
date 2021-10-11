@@ -28,5 +28,9 @@ public class ArduinoDataHandler : MonoBehaviour
         {
             Horizontal = prevdis / 10;
         }
+        else
+        {
+            Horizontal = 0;
+        }
     }
 }
